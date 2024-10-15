@@ -68,10 +68,10 @@ export default defineComponent({
               type="radio"
               name="meetupId"
               class="radio-group__input"
-              :checked="id === currentMeetup"
               :value="id"
               :id="'meetup-id-' + id"
-              @click="fetchMeetup(id)"
+              :checked="id === currentMeetup"
+              @change="fetchMeetup(id)"
             />
             <label :for="'meetup-id-' + id" class="radio-group__label">{{ id }}</label>
           </div>
@@ -80,7 +80,7 @@ export default defineComponent({
         <button
           class="button button--secondary"
           type="button"
-          :disabled="MEETUP_IDS[MEETUP_IDS.length - 1] === currentMeetup ? true : false"
+          :disabled="MEETUP_IDS[MEETUP_IDS.length - 1] === currentMeetup"
           @click="handleNext()"
         >
           Следующий
