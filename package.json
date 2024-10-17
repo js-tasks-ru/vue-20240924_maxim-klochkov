@@ -2,7 +2,6 @@
   "name": "tasks-vue-4",
   "type": "module",
   "version": "6.0.4",
-  "private": true,
   "description": "Taskbook for Vue 3 Course on learn.javascript.ru",
   "author": "Grigorii K. Shartsev <me@shgk.me>",
   "license": "UNLICENSED",
