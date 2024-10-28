@@ -1,11 +1,14 @@
-<script setup>
-import { computed, ref } from 'vue'
+<script setup lang="ts">
+import type { Meetup } from './meetup.ts'
+
 import { UiRadioGroup } from '@shgk/vue-course-ui'
-import MeetupView from './MeetupView.vue'
+import { computed, ref } from 'vue'
+
 import meetups from './meetups.fixture.ts'
+import MeetupView from './MeetupView.vue'
 
 const meetupIndex = ref(0)
-const meetup = computed(() => meetups[meetupIndex.value])
+const meetup = computed(() => meetups[meetupIndex.value] as Meetup)
 const options = meetups.map((_, index) => ({ label: index + 1, value: index }))
 </script>
 
