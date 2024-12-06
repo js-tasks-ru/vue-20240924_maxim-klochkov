@@ -64,12 +64,12 @@ export default defineComponent({
     }
   },
 
-  template: `
+  template: /* html */`
     <div>
       <UiFormGroup>
         <UiInput v-model.trim="query" type="search" placeholder="Поиск" aria-label="Поиск" small />
       </UiFormGroup>
-      <EmailList :emails="markedEmails" />
+      <EmailList :emails="markedEmails" @remove-by-index="removeEmailByIndex" />
     </div>
   `,
 })

@@ -1,6 +1,18 @@
-<script>
-import { computed, defineComponent } from 'vue'
+<script setup lang="ts">
+import type { Agenda } from './meetup'
+
 import { UiIcon } from '@shgk/vue-course-ui'
+import { computed } from 'vue'
+
+type AgendaItemType = keyof typeof agendaItemIcons
+
+interface AgendaItem extends Omit<Agenda, 'type'> {
+  type: AgendaItemType
+}
+
+const props = defineProps<{
+  agendaItem: AgendaItem
+}>()
 
 const agendaItemDefaultTitles = {
   registration: 'Регистрация',
@@ -24,29 +36,8 @@ const agendaItemIcons = {
   other: 'cal-sm',
 }
 
-export default defineComponent({
-  name: 'MeetupAgendaItem',
-
-  components: {
-    UiIcon,
-  },
-
-  props: {
-    agendaItem: {
-      type: Object,
-      required: true,
-    },
-  },
-
-  setup(props) {
-    const icon = computed(() => agendaItemIcons[props.agendaItem.type])
-    const title = computed(() => agendaItemDefaultTitles[props.agendaItem.type])
-    return {
-      icon,
-      title,
-    }
-  },
-})
+const icon = computed(() => agendaItemIcons[props.agendaItem.type])
+const title = computed(() => agendaItemDefaultTitles[props.agendaItem.type])
 </script>
 
 <template>
@@ -54,15 +45,21 @@ export default defineComponent({
     <div class="agenda-item__col">
       <UiIcon :icon="icon" />
     </div>
-    <div class="agenda-item__col">{{ agendaItem.startsAt }} - {{ agendaItem.endsAt }}</div>
     <div class="agenda-item__col">
-      <h3 class="agenda-item__title">{{ title }}</h3>
+      {{ agendaItem.startsAt }} - {{ agendaItem.endsAt }}
+    </div>
+    <div class="agenda-item__col">
+      <h3 class="agenda-item__title">
+        {{ title }}
+      </h3>
       <p v-if="agendaItem.speaker" class="agenda-item__talk">
         <span>{{ agendaItem.speaker }}</span>
-        <span class="agenda-item__dot"></span>
+        <span class="agenda-item__dot" />
         <span class="agenda-item__lang">{{ agendaItem.language }}</span>
       </p>
-      <p v-if="agendaItem.description">{{ agendaItem.description }}</p>
+      <p v-if="agendaItem.description">
+        {{ agendaItem.description }}
+      </p>
     </div>
   </div>
 </template>

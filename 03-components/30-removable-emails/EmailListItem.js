@@ -3,6 +3,8 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'EmailListItem',
 
+  emits: ['remove-email-item'],
+
   props: {
     email: {
       type: String,
@@ -15,10 +17,10 @@ export default defineComponent({
     },
   },
 
-  template: `
+  template: /* html */`
     <li :class="{ marked }">
       {{ email }}
-      <button type="button" aria-label="Удалить" @click.stop>❌</button>
+      <button type="button" aria-label="Удалить" @click.stop="$emit('remove-email-item')">❌</button>
     </li>
   `,
 })
